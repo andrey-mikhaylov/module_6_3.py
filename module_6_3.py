@@ -1,3 +1,80 @@
+class Horse():
+    """ лошадь """
+
+    def __init__(self):
+        self.x_distance = 0     # пройденный путь.
+        self.sound = 'Frrr'     # звук, который издаёт лошадь.
+
+    def run(self, dx: int):
+        """
+        :param dx: изменение дистанции, увеличивает x_distance на dx.
+        """
+        self.x_distance += dx
+
+
+class Eagle():
+    """ Орёл """
+
+    def __init__(self):
+        self.y_distance = 0                             # высота полёта
+        self.sound = 'I train, eat, sleep, and repeat'  # звук, который издаёт орёл(отсылка)
+
+    def fly(self, dy: int):
+        """
+        :param dy: изменение дистанции, увеличивает y_distance на dy.
+        """
+        self.y_distance += dy
+
+
+class Pegasus(Horse, Eagle):
+    """ пегас """
+    def __init__(self):
+        Horse.__init__(self)
+        Eagle.__init__(self)
+
+    def move(self, dx: int, dy: int):
+        """
+        :param dx: изменение дистанции x
+        :param dy: изменение дистанции y
+        :return:
+        """
+        self.run(dx)
+        self.fly(dy)
+
+    def get_pos(self) -> (int, int):
+        """
+        :return: текущее положение пегаса в виде кортежа - (x_distance, y_distance).
+        """
+        return self.x_distance, self.y_distance
+
+    def voice(self):
+        """
+        Печатает значение унаследованного атрибута sound
+        """
+        print(self.sound)
+
+
+def test():
+    p1 = Pegasus()
+
+    print(p1.get_pos())
+    p1.move(10, 15)
+    print(p1.get_pos())
+    p1.move(-5, 20)
+    print(p1.get_pos())
+
+    p1.voice()
+    """
+    Вывод на консоль:
+    (0, 0)
+    (10, 15)
+    (5, 35)
+    I train, eat, sleep, and repeat
+    """
+
+
+if __name__ == '__main__':
+    test()
 
 
 """
